@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CNotely - 为 GitHub 和 Google Drive 提供卓越的云内容用户体验层。支持富文本、Markdown 和多格式导出。">
+    <meta name="keywords" content="网页剪辑器, 笔记系统, GitHub 笔记, Google Drive 笔记, Markdown 编辑器, 富文本编辑器, 导出 PDF">
+    <title>CNotely | 您的云内容用户体验层</title>
+    <link rel="icon" href="img/logo.png" type="image/png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cnotely.com/">
+    <meta property="og:title" content="CNotely | 私有云知识库系统">
+    <meta property="og:description" content="不要再让您的文件沉睡。使用我们的网页剪辑器和编辑器，将您的 GitHub/Google Drive 转变为专业知识库。">
+    <meta property="og:image" content="https://cnotely.com/img/og-preview.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="CNotely | 云内容用户体验层">
+    <meta property="twitter:description" content="注重隐私的网络与云存储之间的桥梁。捕获、编辑并导出为 PDF/Docx。">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* 暗色主题变量 */
+            --bg-primary: #050505;
+            --text-primary: #fafafa;
+            --accent: #3b82f6;
+            --accent-soft: rgba(59, 130, 246, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-bg: rgba(255, 255, 255, 0.04);
+            --card-hover-border: rgba(96, 165, 250, 0.4);
+            --nav-bg: rgba(0, 0, 0, 0.5);
+            --nav-border: rgba(255, 255, 255, 0.05);
+        }
+
+        /* 亮色主题变量 */
+        body.light-theme {
+            --bg-primary: #ffffff;
+            --text-primary: #1a1a1a;
+            --accent: #2563eb;
+            --accent-soft: rgba(37, 99, 235, 0.1);
+            --card-bg: rgba(0, 0, 0, 0.02);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --card-hover-bg: rgba(0, 0, 0, 0.04);
+            --card-hover-border: rgba(37, 99, 235, 0.4);
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --nav-border: rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            scroll-behavior: smooth;
+            transition: all 0.3s ease;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa, #2dd4bf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            border-color: var(--card-hover-border);
+            transform: translateY(-4px);
+            background: var(--card-hover-bg);
+        }
+
+        .badge {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .feature-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: inline-block;
+        }
+
+        /* 增加平滑入场感 */
+        .reveal {
+            animation: reveal 0.8s ease-out forwards;
+        }
+
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <nav class="fixed top-0 w-full z-50 border-b backdrop-blur-lg"
+        style="border-color: var(--nav-border); background-color: var(--nav-bg);">
+        <div class="flex justify-between items-center p-5 max-w-7xl mx-auto">
+            <div class="text-2xl font-800 tracking-tighter flex items-center gap-2">
+                <div
+                    class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-sm shadow-lg shadow-blue-500/20">
+                    <span class="font-bold">C</span>
+                </div>
+                CNotely<span class="text-blue-500."></span>
+            </div>
+            <div class="flex gap-6 items-center text-sm font-semibold">
+                <button id="theme-toggle" class="opacity-50 hover:opacity-100 transition flex items-center gap-2">
+                    <span class="dark-icon">🌙</span>
+                    <span class="light-icon hidden">☀️</span>
+                    <span>暗色</span>
+                </button>
+                <a href="index.html" class="opacity-50 hover:opacity-100 transition">English</a>
+                <a href="https://app.cnotely.com"
+                    class="bg-white text-black px-5 py-2.5 rounded-xl hover:scale-105 transition active:scale-95 shadow-lg">启动应用</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-48 pb-32 text-center px-4 relative overflow-hidden reveal">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[120px] -z-10">
+        </div>
+        <div class="inline-block px-4 py-1.5 mb-8 rounded-full badge text-[10px] uppercase tracking-[0.2em] font-bold">
+            个人知识管理 (PKM)
+        </div>
+        <h1 class="text-5xl md:text-8xl font-800 mb-8 tracking-tight leading-[1.1]">
+            将您的云盘<br><span class="gradient-text text-6xl md:text-8xl">转变为知识库。</span>
+        </h1>
+        <p class="max-w-2xl mx-auto opacity-50 text-lg md:text-xl mb-12 leading-relaxed font-medium">
+            不要再让您的文件沉睡。CNotely 提供 <strong>体验层</strong>
+            直接在您的 GitHub 或 Google Drive 上捕获、组织和检索知识。
+        </p>
+        <div class="flex justify-center gap-4">
+            <a href="#products"
+                class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition shadow-xl shadow-blue-900/20">开始使用</a>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto py-24 px-6 border-y border-white/5 bg-white/[0.01]">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-6 italic">知识的生命周期</h2>
+                <p class="opacity-50 mb-10 leading-relaxed">CNotely 不仅仅是一个工具；它是混乱网络与有序云存储之间的桥梁。我们管理复杂性，您拥有洞见。</p>
+
+                <div class="space-y-8">
+                    <div class="flex gap-6">
+                        <div
+                            class="flex-none w-10 h-10 rounded-full border border-blue-500/30 flex items-center justify-center text-blue-500 font-bold">
+                            1</div>
+                        <div>
+                            <h4 class="font-bold mb-1">知识输入</h4>
+                            <p class="text-sm opacity-50">从任何网站捕获干净的内容。我们去除噪音，保留元数据。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div
+                            class="flex-none w-10 h-10 rounded-full border border-teal-500/30 flex items-center justify-center text-teal-500 font-bold">
+                            2</div>
+                        <div>
+                            <h4 class="font-bold mb-1">知识中心</h4>
+                            <p class="text-sm opacity-50">使用专业级界面管理您的库。包含全文搜索和富文本编辑。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6">
+                <div class="glass-card p-8 rounded-3xl border-blue-500/10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="p-2 bg-blue-500/10 rounded-lg">🛡️</span>
+                        <h4 class="font-bold text-lg">无数据库存储</h4>
+                    </div>
+                    <p class="text-sm opacity-50 leading-relaxed">我们从不存储您的笔记内容。您的云存储（GitHub/G-Drive）始终是
+                        <strong>唯一的真实来源</strong>。我们只处理授权和索引。
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl border-teal-500/10 bg-teal-500/[0.02]">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="p-2 bg-teal-500/10 rounded-lg">📤</span>
+                        <h4 class="font-bold text-lg">专业级发布</h4>
+                    </div>
+                    <p class="text-sm opacity-50 leading-relaxed">立即将您的想法转换为专业的 <strong>PDF、DOCX 或 HTML</strong>。随时准备分享。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="max-w-7xl mx-auto py-32 px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">统一捕获与回顾</h2>
+            <p class="opacity-40">转变您数字图书馆的双重工具。</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="flex flex-col">
+                <div class="glass-card p-12 rounded-[3rem] border-blue-500/20 relative overflow-hidden group h-full">
+                    <div
+                        class="absolute -right-10 -top-10 w-40 h-40 bg-blue-500/5 blur-3xl group-hover:bg-blue-500/10 transition">
+                    </div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight">CNotely 扩展</span>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-6">智能捕获。</h3>
+                    <p class="opacity-60 text-lg mb-4 leading-relaxed italic">"将网络内容带入您的库。"</p>
+                    <p class="opacity-60 text-lg mb-8 leading-relaxed italic">"支持导出：MD, PDF, DOCX, HTML, TXT"</p>
+                    <ul class="space-y-4 text-sm font-medium opacity-80 mb-12 flex-1">
+                        <li class="flex items-center gap-3"><span class="feature-dot"></span> 一键富文本/Markdown 剪辑</li>
+                        <li class="flex items-center gap-3"><span class="feature-dot"></span> 智能噪音移除</li>
+                        <li class="flex items-center gap-3"><span class="feature-dot"></span> 高保真图像保存</li>
+                    </ul>
+                    <div class="space-y-3">
+                        <a href="https://chromewebstore.google.com/detail/cnotely-%E2%80%93-save-web-content/adckfinclpmhjnijmeeejkdhocikacgd"
+                            target="_blank"
+                            class="block w-full py-4 rounded-xl bg-blue-600/10 border border-blue-500/20 font-bold text-blue-400 hover:bg-blue-600 hover:text-white transition flex items-center justify-center gap-2">
+                            <img src="img/google_favicon.png" alt="Chrome" class="w-5 h-5" />
+                            <span>Chrome 扩展</span>
+                        </a>
+                        <a href="https://microsoftedge.microsoft.com/addons/detail/bdcofhehaohhfckpelmkkpmigoemecpp"
+                            target="_blank"
+                            class="block w-full py-4 rounded-xl bg-blue-600/10 border border-blue-500/20 font-bold text-blue-400 hover:bg-blue-600 hover:text-white transition flex items-center justify-center gap-2">
+                            <img src="img/microsoft_favicon.png" alt="Edge" class="w-5 h-5" />
+                            <span>Edge 扩展</span>
+                        </a>
+                        <a href="https://addons.mozilla.org/en-US/firefox/addon/cnote/" target="_blank"
+                            class="block w-full py-4 rounded-xl bg-blue-600/10 border border-blue-500/20 font-bold text-blue-400 hover:bg-blue-600 hover:text-white transition flex items-center justify-center gap-2">
+                            <img src="img/mozilla_favicon.png" alt="Firefox" class="w-5 h-5" />
+                            <span>Firefox 扩展</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col">
+                <div class="glass-card p-12 rounded-[3rem] border-teal-500/20 relative overflow-hidden group h-full">
+                    <div
+                        class="absolute -right-10 -top-10 w-40 h-40 bg-teal-500/5 blur-3xl group-hover:bg-teal-500/10 transition">
+                    </div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 bg-teal-500/20 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight">CNotely 网页版</span>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-6">专业管理。</h3>
+                    <p
+                        class="opacity-60 text-lg mb-8 leading-relaxed italic text-teal-400/80 uppercase tracking-widest text-[12px] font-bold">
+                        GitHub & Google Drive</p>
+                    <ul class="space-y-4 text-sm font-medium opacity-80 mb-12 flex-1">
+                        <li class="flex items-center gap-3"><span class="feature-dot bg-teal-500"></span> 专业富文本 &
+                            Markdown 编辑器</li>
+                        <li class="flex items-center gap-3"><span class="feature-dot bg-teal-500"></span> 即时云索引搜索</li>
+                        <li class="flex items-center gap-3"><span class="feature-dot bg-teal-500"></span> 通用文档导出</li>
+                    </ul>
+                    <a href="https://app.cnotely.com"
+                        class="block w-full text-center py-5 rounded-2xl bg-white text-black font-bold hover:bg-blue-50 transition shadow-lg">打开知识中心</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto py-32 px-6 border-t border-white/5">
+        <div class="mb-16 text-center">
+            <h2 class="text-sm font-bold tracking-[0.3em] uppercase opacity-40 mb-4 tracking-[0.5em]">技术规格表</h2>
+            <div class="h-1 w-12 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+            <div class="text-center md:text-left">
+                <div class="text-xs font-bold uppercase mb-4 opacity-30 tracking-widest">存储</div>
+                <p class="text-sm font-semibold italic">GitHub 和 Google Drive</p>
+                <p class="text-xs opacity-40 mt-1 uppercase">去中心化 / 无数据库</p>
+            </div>
+            <div class="text-center md:text-left">
+                <div class="text-xs font-bold uppercase mb-4 opacity-30 tracking-widest">编辑</div>
+                <p class="text-sm font-semibold italic">双模式架构</p>
+                <p class="text-xs opacity-40 mt-1 uppercase">富文本和 Markdown</p>
+            </div>
+            <div class="text-center md:text-left">
+                <div class="text-xs font-bold uppercase mb-4 opacity-30 tracking-widest">隐私</div>
+                <p class="text-sm font-semibold italic">OAuth 2.0 认证</p>
+                <p class="text-xs opacity-40 mt-1 uppercase">无内容日志</p>
+            </div>
+            <div class="text-center md:text-left">
+                <div class="text-xs font-bold uppercase mb-4 opacity-30 tracking-widest">分发</div>
+                <p class="text-sm font-semibold italic">多格式</p>
+                <p class="text-xs opacity-40 mt-1 uppercase">PDF, DOCX, HTML, MD</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto py-20 px-6">
+        <h2 class="text-2xl font-bold mb-10 text-center">常见问题</h2>
+        <div class="space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="font-bold text-blue-400">为什么要在 GitHub 或 Google Drive 上存储笔记？</h3>
+                <p class="text-sm opacity-60 mt-2">在您自己的云上存储笔记可确保数据主权并避免平台锁定。您的知识将以标准的 .md 或 .html 文件形式永远与您同在。</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="font-bold text-teal-400">我的数据在 CNotely 上安全吗？</h3>
+                <p class="text-sm opacity-60 mt-2">CNotely 是一个用户体验层，不是存储提供商。我们使用 OAuth 2.0 进行安全访问，从不将您的笔记内容存储在我们自己的数据库中。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pt-24 pb-12 border-t border-white/5 text-center px-6">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6">无数据库。无锁定。</h2>
+            <p class="opacity-40 text-sm mb-12 leading-relaxed tracking-wide uppercase font-medium">
+                隐私不是功能，而是我们的核心架构。<br>
+                我们使用 OAuth 2.0。我们从不见到您的密码。我们从不存储您的笔记。
+            </p>
+            <div class="flex justify-center gap-8 opacity-40 text-xs font-semibold uppercase tracking-[0.2em] mb-12">
+                <a href="https://app.cnotely.com/privacy-policy" class="hover:text-blue-400 transition">隐私</a>
+                <a href="https://app.cnotely.com/terms-of-service" class="hover:text-blue-400 transition">条款</a>
+                <a href="mailto:support@cnotely.com" class="hover:text-blue-400 transition">联系我们</a>
+            </div>
+            <div class="text-[10px] opacity-20 uppercase font-bold tracking-widest">© 2026 CNotely 云用户体验层</div>
+        </div>
+    </footer>
+
+</body>
+
+<script>
+    // 主题切换功能
+    const themeToggle = document.getElementById('theme-toggle');
+    const darkIcon = document.querySelector('.dark-icon');
+    const lightIcon = document.querySelector('.light-icon');
+    const themeText = themeToggle.querySelector('span:last-child');
+
+    // 更新主题切换按钮的显示
+    function updateThemeToggle() {
+        if (document.body.classList.contains('light-theme')) {
+            // 当前是亮色主题，按钮应该显示切换到暗色主题
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+            themeText.textContent = '暗色';
+        } else {
+            // 当前是暗色主题，按钮应该显示切换到亮色主题
+            darkIcon.classList.add('hidden');
+            lightIcon.classList.remove('hidden');
+            themeText.textContent = '亮色';
+        }
+    }
+
+    // 检查本地存储中的主题设置
+    const savedTheme = localStorage.getItem('cnotely-theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+    }
+    // 更新主题切换按钮的显示
+    updateThemeToggle();
+
+    // 主题切换按钮点击事件
+    themeToggle.addEventListener('click', function () {
+        document.body.classList.toggle('light-theme');
+        
+        // 保存主题设置到本地存储
+        if (document.body.classList.contains('light-theme')) {
+            localStorage.setItem('cnotely-theme', 'light');
+        } else {
+            localStorage.setItem('cnotely-theme', 'dark');
+        }
+        
+        // 更新主题切换按钮的显示
+        updateThemeToggle();
+    });
+    </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CNotely",
+  "operatingSystem": "Web, Chrome, Edge",
+  "applicationCategory": "ProductivityApplication",
+  "description": "A Cloud Content UX Layer that helps users clip web content and manage notes on GitHub or Google Drive.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Web Clipping",
+    "Rich-text Editing",
+    "Markdown Support",
+    "GitHub Synchronization",
+    "Google Drive Synchronization",
+    "Multi-format Export (PDF, Docx, HTML)"
+  ]
+}
+</script>
+
+</html>
