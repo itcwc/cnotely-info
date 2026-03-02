@@ -1,5 +1,7 @@
 # CNotely - 云内容用户体验层
 
+![CNotely Demo](https://path-to-your-demo.gif)
+
 [English](README.md)
 
 ## 目录
