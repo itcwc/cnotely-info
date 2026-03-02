@@ -1,6 +1,6 @@
 # CNotely - 云内容用户体验层
 
-中文 | [English](README.md)
+[English](README.md)
 
 ## 目录
 

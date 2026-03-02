@@ -2,7 +2,7 @@
 
 ![CNotely Demo](https://path-to-your-demo.gif)
 
-[中文](README_CN.md) | English
+[中文](README_CN.md)
 
 ## Table of Contents
 
