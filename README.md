@@ -1,12 +1,12 @@
-# CNotely - Cloud Content UX Layer
+# cnotely - Cloud Content UX Layer
 
-![CNotely Demo](https://path-to-your-demo.gif)
+![cnotely Demo](https://path-to-your-demo.gif)
 
 [中文](README_CN.md)
 
 ## Table of Contents
 
-- 📁 [CNotely - Cloud Content UX Layer](#cnotely---cloud-content-ux-layer)
+- 📁 [cnotely - Cloud Content UX Layer](#cnotely---cloud-content-ux-layer)
   - 📑 [Table of Contents](#table-of-contents)
   - 📋 [Project Overview](#project-overview)
   - ⭐ [Core Features](#core-features)
@@ -17,7 +17,7 @@
       - 🔄 [Data Flow Process](#data-flow-process)
   - 📊 [Technical Specifications](#technical-specifications)
   - 📈 [How It Works](#how-it-works)
-  - ❓ [Why CNotely?](#why-cnotely)
+  - ❓ [Why cnotely?](#why-cnotely)
   - 🚀 [Getting Started](#getting-started)
   - 💼 [Use Cases](#use-cases)
   - 🌍 [Browser Extensions](#browser-extensions)
@@ -27,7 +27,7 @@
 
 ## 📋 Project Overview
 
-CNotely is a powerful Cloud Content UX Layer that transforms your GitHub and Google Drive into a professional knowledge base. It provides a seamless experience for capturing, organizing, and retrieving knowledge from the web directly to your cloud storage.
+cnotely is a powerful Cloud Content UX Layer that transforms your GitHub and Google Drive into a professional knowledge base. It provides a seamless experience for capturing, organizing, and retrieving knowledge from the web directly to your cloud storage.
 
 ## ⭐ Core Features
 
@@ -48,7 +48,7 @@ CNotely is a powerful Cloud Content UX Layer that transforms your GitHub and Goo
 
 #### 🛡️ Privacy-First Architecture
 
-- **Zero-DB Architecture** - No content storage on CNotely servers
+- **Zero-DB Architecture** - No content storage on cnotely servers
 - **OAuth 2.0 Authentication** - Secure access to your cloud storage
 - **Data Sovereignty** - Your cloud storage remains the single source of truth
 - **No Lock-in** - Notes stored as standard .md or .html files
@@ -81,7 +81,7 @@ graph LR
    - **Google Drive** - Upload to your Google Drive account
    - **GitHub** - Commit to your GitHub repository
 
-No content is ever stored on CNotely servers. Your data remains under your control at all times.
+No content is ever stored on cnotely servers. Your data remains under your control at all times.
 
 ## 📊 Technical Specifications
 
@@ -99,7 +99,7 @@ No content is ever stored on CNotely servers. Your data remains under your contr
 2. **Knowledge Hub** - Manage your vault with a professional UI, including full-text search and rich-text editing
 3. **Knowledge Output** - Export your notes to multiple formats for sharing or presentation
 
-## ❓ Why CNotely?
+## ❓ Why cnotely?
 
 - **Privacy-First Design** - Your data remains in your control at all times
 - **No Database Storage** - We never store your note bodies, only handle authorization and indexing
@@ -125,13 +125,13 @@ No content is ever stored on CNotely servers. Your data remains under your contr
 
 ## 🌍 Browser Extensions
 
-- **Chrome**: [CNotely - Save Web Content](https://chromewebstore.google.com/detail/cnotely-%E2%80%93-save-web-content/adckfinclpmhjnijmeeejkdhocikacgd)
-- **Edge**: [CNotely - Save Web Content](https://microsoftedge.microsoft.com/addons/detail/bdcofhehaohhfckpelmkkpmigoemecpp)
-- **Firefox**: [CNotely](https://addons.mozilla.org/en-US/firefox/addon/cnote/)
+- **Chrome**: [cnotely - Save Web Content](https://chromewebstore.google.com/detail/cnotely-%E2%80%93-save-web-content/adckfinclpmhjnijmeeejkdhocikacgd)
+- **Edge**: [cnotely - Save Web Content](https://microsoftedge.microsoft.com/addons/detail/bdcofhehaohhfckpelmkkpmigoemecpp)
+- **Firefox**: [cnotely](https://addons.mozilla.org/en-US/firefox/addon/cnote/)
 
 ## 🖥️ Web Application
 
-Access the full CNotely experience at [app.cnotely.com](https://app.cnotely.com)
+Access the full cnotely experience at [app.cnotely.com](https://app.cnotely.com)
 
 ## 📄 Privacy & Terms
 
@@ -145,6 +145,6 @@ Access the full CNotely experience at [app.cnotely.com](https://app.cnotely.com)
 
 ---
 
-© 2026 CNotely Cloud UX Layer
+© 2026 cnotely Cloud UX Layer
 
 *No Database. No Lock-in. Your Knowledge, Your Control.*

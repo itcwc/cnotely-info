@@ -1,6 +1,6 @@
-# CNotely - 云内容用户体验层
+# cnotely - 云内容用户体验层
 
-![CNotely Demo](https://path-to-your-demo.gif)
+![cnotely Demo](https://path-to-your-demo.gif)
 
 [English](README.md)
 
@@ -15,7 +15,7 @@
     - 🔄 [数据流程](#-数据流程)
 - 📊 [技术规格](#-技术规格)
 - 📈 [工作原理](#-工作原理)
-- ❓ [为什么选择 CNotely？](#-为什么选择-cnotely)
+- ❓ [为什么选择 cnotely？](#-为什么选择-cnotely)
 - 🚀 [开始使用](#-开始使用)
 - 💼 [使用场景](#-使用场景)
 - 🌍 [浏览器扩展](#-浏览器扩展)
@@ -25,7 +25,7 @@
 
 ## 📋 项目概述
 
-CNotely 是一个强大的云内容用户体验层，将您的 GitHub 和 Google Drive 转变为专业知识库。它提供了无缝的体验，用于从网络捕获、组织和检索知识，直接存储到您的云存储中。
+cnotely 是一个强大的云内容用户体验层，将您的 GitHub 和 Google Drive 转变为专业知识库。它提供了无缝的体验，用于从网络捕获、组织和检索知识，直接存储到您的云存储中。
 
 ## ⭐ 核心功能
 
@@ -46,7 +46,7 @@ CNotely 是一个强大的云内容用户体验层，将您的 GitHub 和 Google
 
 #### 🛡️ 隐私优先架构
 
-- **零数据库架构** - CNotely 服务器上无内容存储
+- **零数据库架构** - cnotely 服务器上无内容存储
 - **OAuth 2.0 认证** - 安全访问您的云存储
 - **数据主权** - 您的云存储始终是唯一的真实来源
 - **无锁定** - 笔记以标准 .md 或 .html 文件形式存储
@@ -79,7 +79,7 @@ graph LR
    - **谷歌云盘** - 上传到您的 Google Drive 账户
    - **GitHub** - 提交到您的 GitHub 仓库
 
-内容永远不会存储在 CNotely 服务器上。您的数据始终在您的控制之下。
+内容永远不会存储在 cnotely 服务器上。您的数据始终在您的控制之下。
 
 ## 📊 技术规格
 
@@ -97,7 +97,7 @@ graph LR
 2. **知识中心** - 使用专业界面管理您的库，包括全文搜索和富文本编辑
 3. **知识输出** - 将您的笔记导出为多种格式，用于分享或展示
 
-## ❓ 为什么选择 CNotely？
+## ❓ 为什么选择 cnotely？
 
 - **隐私优先设计** - 您的数据始终在您的控制之下
 - **无数据库存储** - 我们从不存储您的笔记内容，只处理授权和索引
@@ -123,13 +123,13 @@ graph LR
 
 ## 🌍 浏览器扩展
 
-- **Chrome**: [CNotely - 保存网页内容](https://chromewebstore.google.com/detail/cnotely-%E2%80%93-save-web-content/adckfinclpmhjnijmeeejkdhocikacgd)
-- **Edge**: [CNotely - 保存网页内容](https://microsoftedge.microsoft.com/addons/detail/bdcofhehaohhfckpelmkkpmigoemecpp)
-- **Firefox**: [CNotely](https://addons.mozilla.org/en-US/firefox/addon/cnote/)
+- **Chrome**: [cnotely - 保存网页内容](https://chromewebstore.google.com/detail/cnotely-%E2%80%93-save-web-content/adckfinclpmhjnijmeeejkdhocikacgd)
+- **Edge**: [cnotely - 保存网页内容](https://microsoftedge.microsoft.com/addons/detail/bdcofhehaohhfckpelmkkpmigoemecpp)
+- **Firefox**: [cnotely](https://addons.mozilla.org/en-US/firefox/addon/cnote/)
 
 ## 🖥️ 网页应用
 
-在 [app.cnotely.com](https://app.cnotely.com) 访问完整的 CNotely 体验
+在 [app.cnotely.com](https://app.cnotely.com) 访问完整的 cnotely 体验
 
 ## 📄 隐私与条款
 
@@ -143,6 +143,6 @@ graph LR
 
 ---
 
-© 2026 CNotely 云用户体验层
+© 2026 cnotely 云用户体验层
 
 *无数据库。无锁定。您的知识，您的控制。*
