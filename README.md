@@ -1,6 +1,6 @@
 # cnotely - Cloud Content UX Layer
 
-![cnotely Demo](https://path-to-your-demo.gif)
+![cnotely Demo](./img/en_web.png)
 
 [中文](README_CN.md)
 

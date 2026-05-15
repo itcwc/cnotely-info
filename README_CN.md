@@ -1,6 +1,6 @@
 # cnotely - 云内容用户体验层
 
-![cnotely Demo](https://path-to-your-demo.gif)
+![cnotely Demo](./img/cn_web.png)
 
 [English](README.md)
 
